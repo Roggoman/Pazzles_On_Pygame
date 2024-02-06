@@ -8,13 +8,14 @@ import os
 import shutil
 import tkinter as tk
 from tkinter import messagebox
+import sprite
 
 pygame.init()
 
 # Константы окна
 X = 1000
 Y = 600
-FPS = 30
+FPS = 40
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 ORANGE = (238, 159, 34)
@@ -37,6 +38,7 @@ error_im = pygame.image.load("data/imgs/error.png")
 menu_im = pygame.image.load("data/imgs/menu.png")
 
 # Объявление переменных
+all_sprites = sprite.main()
 screen = pygame.display.set_mode([X, Y])
 loading = 0
 clock = pygame.time.Clock()
@@ -265,6 +267,8 @@ while game_run_flag:
                 pass
     if window_flag == -1:
         screen.fill(BLACK)
+        all_sprites.update()
+        all_sprites.draw(screen)
         font = pygame.font.Font(None, 90)
         text = font.render("Загрузка:", True, WHITE)
         screen.blit(text, (x + 340, y + 120))
